@@ -51,7 +51,7 @@ namespace MagicVilla_Web.Controllers
                     return RedirectToAction(nameof(IndexVilla));
                 }
             }
-            TempData["error"] = "Error encound.";
+            TempData["error"] = "Error encountered";
             return View(model);
         }
         [Authorize(Roles = "admin")]
