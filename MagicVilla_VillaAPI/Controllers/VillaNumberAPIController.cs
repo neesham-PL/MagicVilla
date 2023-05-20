@@ -177,14 +177,17 @@ namespace MagicVilla_VillaAPI.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                if (await _dbVilla.GetAsync(u => u.Id == updateDTO.VillaId) == null)
+
+
+                var model = await _dbVilla.GetAsync(u => u.Id == updateDTO.VillaId);
+                if (model == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Villa ID is Invalid");
                     return BadRequest(ModelState);
                 }
-                VillaNumber model = _mapper.Map<VillaNumber>(updateDTO);
+                VillaNumber mode = _mapper.Map<VillaNumber>(updateDTO);
 
-                await _dbVillaNumber.UpdateAsync(model);
+                await _dbVillaNumber.UpdateAsync(mode);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
